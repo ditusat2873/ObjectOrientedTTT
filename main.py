@@ -10,18 +10,18 @@ class Board:
         print("-+" * 3)
         print(self.positions["7"] + "|" + self.positions["8"] + "|" + self.positions["9"] + "|")
 
-
+    '''This function checks if the position the player places is available and returns True or False based on position'''
     def validMove(self, position):
         if self.positions[position] == " ":
             return True
         return False
-
+    '''This function will then update the board with the position.  Before updating, it checks if the position is valid by calling validMove'''
     def boardChange(self, position, name):
         if self.validMove(position):
             self.positions[position] = name
             return self.positions
         return None
-
+    '''This function will see if a win is made.  It will then use a for loop to check the values inside the cases.'''
     def winnerCheck(self, player):
         playerType = player.name
         runs = [
@@ -52,12 +52,13 @@ class Game:
         self.player2 = Player("O")
         self.board = Board()
 
+    '''This will just print out the numbers associated with the positions on the board.'''
     def entries(self):
         print("""
             1 - top left    | 2 - top middle    | 3 - top right
             4 - middle left | 5 - center        | 6 - middle right
             7 - bottom left | 8 - bottom middle | 9 - bottom right""")
-
+    '''This method will print the board.'''
     def printBoard(self):
 
         self.board.print_board()
@@ -75,6 +76,7 @@ class Game:
     def won_game(self, player):
         return self.board.winnerCheck(player)
 
+    '''This will update the board and check if any positions are not available'''
     def modifyBoard(self, position, name):
 
         if self.board.boardChange(position, name) is not None:
@@ -83,7 +85,7 @@ class Game:
             position = input("Not available position. Please, try again: ")
             return self.board.boardChange(position, name)
 
-
+'''The main method in which the entire game will run'''
 def play():
 
     game = Game()
